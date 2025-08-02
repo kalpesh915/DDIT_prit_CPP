@@ -17,12 +17,12 @@ int main(){
     }
 
     /// Bubble sorting process
-    for(i=0; i<size; i++){ /// 10 time
-        for(j=0; j<size; j++){ /// 10 times
-            if(ip[i] < ip[j]){
-                tmp = ip[i];
-                ip[i] = ip[j];
-                ip[j] = tmp;
+    for(i=0; i<size-1; i++){
+        for(j=0; j<size - i - 1; j++){
+            if(ip[j] > ip[j+1]){
+                tmp = ip[j];
+                ip[j] = ip[j+1];
+                ip[j+1] = tmp;
             }
         }
     }
