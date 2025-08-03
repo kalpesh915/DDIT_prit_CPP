@@ -3,11 +3,11 @@
 
 using namespace std;
 /**
-    Sort array elements with use of bubble sort
+    Sort array elements with use of Selection sort
 */
 
 int main(){
-    int ip[size], i, j, tmp;
+    int ip[size], i, j, tmp, key;
 
     /// Get values from user
     for(i=0; i<size; i++){
@@ -15,15 +15,20 @@ int main(){
         cin>>ip[i];
     }
 
-    /// bubble sort process
+    /// Selection sort process
     for(i=0; i<size-1; i++){
-        for(j=0; j<size-i-1; j++){
-            if(ip[j] > ip[j+1]){
-                tmp = ip[j];
-                ip[j] = ip[j+1];
-                ip[j+1] = tmp;
+        key = i;
+
+        for(j=i+1; j<size; j++){
+            if(ip[j] < ip[key]){
+                key = j;
             }
         }
+
+        /// swap process
+        tmp = ip[i];
+        ip[i] = ip[key];
+        ip[key] = tmp;
     }
 
     /// printing sorted elements of array
