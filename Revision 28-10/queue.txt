@@ -1,0 +1,101 @@
+#include <iostream>
+using namespace std;
+
+class Queue{
+    int front, rear, *data, max;
+    
+    public:
+    Queue(int size){
+        data = new int[size];
+        max = size;
+        
+        front = rear = -1;
+    }
+    
+    bool isEmpty(){
+        return front == -1 || front > rear;
+    }
+    
+    bool isFull(){
+        return rear == max - 1;
+    }
+    
+    void enQueue(int value){
+        if(isFull()){
+            cout<<endl<<"Queue is Full ";
+            return;
+        }
+        
+        if(isEmpty()){
+            front = 0;
+        }
+        
+        rear++;
+        data[rear] = value;
+    }
+    
+    int getFront(){
+        if(isEmpty()){
+            cout<<endl<<"Queue is Empty";
+            return -1;
+        }
+        
+        return data[front];
+    }
+    
+    int getRear(){
+        if(isEmpty()){
+            cout<<endl<<"Queue is Empty";
+            return -1;
+        }
+        
+        return data[rear];
+    }
+    
+    void display(){
+        if(isEmpty()){
+            cout<<endl<<"Queue is Empty";
+            return;
+        }
+        
+        cout<<endl<<"Data From Queue : ";
+        for(int i = front; i <= rear; i++){
+            cout<<" "<<data[i];
+        }
+    }
+    
+    int deQueue(){
+        if(isEmpty()){
+            cout<<endl<<"Queue is Empty";
+            return -1;
+        }
+        
+        int tmp = data[front];
+        front++;
+        
+        if(isEmpty()){
+            front = rear = -1;
+        }
+        
+        return tmp;
+    }
+};
+
+int main(){
+    Queue queue(5);
+    queue.enQueue(11);
+    queue.enQueue(12);
+    queue.enQueue(13);
+    queue.enQueue(14);
+    queue.enQueue(15);
+    queue.enQueue(16);
+    
+    queue.display();
+    cout<<endl<<"Front "<<queue.getFront();
+    cout<<endl<<"Rear "<<queue.getRear();
+    
+    cout<<endl<<queue.deQueue();
+    cout<<endl<<queue.deQueue();
+    cout<<endl<<queue.deQueue();
+    return 0;
+}

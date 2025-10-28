@@ -1,0 +1,92 @@
+#include <iostream>
+using namespace std;
+
+/*
+    Stack -> 
+    push(value) : insert value in stack
+    pop() : return top value and remove top element 
+    peek() : return top value
+    isFull() : check stack is full or not
+    isEmpty() : check stack is empty or not
+*/
+
+class Stack{
+  int top, max, *data;
+  
+  public:
+  Stack(int size){
+      top = -1;
+      max = size;
+      data = new int[size];
+  }
+  
+  bool push(int value){ 
+      if(top >= max - 1){
+          cout<<endl<<"Stack is Overflow";
+          return false;
+      }else{
+          data[++top] = value;
+          return true;
+      }
+  }
+  
+  int peek(){
+      if(top < 0){
+          cout<<endl<<"Stack is Empty";
+          return 0;
+      }
+      return data[top];
+  }
+  
+  int pop(){
+    if(top < 0){
+        cout<<endl<<"Stack is Empty";
+        return 0;
+    }
+    
+    return data[top--];
+  }
+  
+  bool isEmpty(){
+      return top == -1 ? true : false;
+  }
+  
+  bool isFull(){
+      return top == max - 1 ? true : false;
+  }
+};
+
+int main(){
+    Stack stack(10);
+ 
+    cout<<endl<<"Stack is Empty "<<stack.isEmpty();
+    
+    stack.push(121); // 0
+    stack.push(122); // 1
+    stack.push(123); // 2
+    stack.push(124); // 3
+    stack.push(125); // 4
+    stack.push(126); // 5
+    stack.push(127); // 6
+    stack.push(128); // 7
+    stack.push(129); // 8
+    stack.push(130); // 9
+    
+    cout<<endl<<"Stack is Empty "<<stack.isEmpty();
+    
+    cout<<endl<<"Stack is Full "<<stack.isFull();
+    
+    stack.push(131); // 10
+    
+    cout<<endl<<"Peek Function ";
+    cout<<" "<<stack.peek();
+    
+    
+    cout<<endl<<"Pop Function";
+    cout<<" "<<stack.pop();
+    cout<<" "<<stack.pop();
+    cout<<" "<<stack.pop();
+    
+    cout<<endl<<"Stack is Full "<<stack.isFull();
+    return 0;
+}
