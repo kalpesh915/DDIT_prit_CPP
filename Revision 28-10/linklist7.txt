@@ -1,0 +1,206 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node *next;
+    
+    Node(){ 
+        this->next = NULL;
+    }
+    
+    Node(int value){
+        this->data = value;
+        this->next = NULL;
+    }
+};
+
+class LinkedList{
+  Node *head;
+  
+  public:
+  LinkedList(){
+      head = NULL;
+  }
+
+    // insert node at begining  
+    void insertAtBegin(int value){
+        Node *newNode = new Node(value);
+        
+        /// check for  linked list is empty
+        if(head == NULL){
+            head = newNode;
+        }else{
+            newNode->next = head;
+            head = newNode;
+        }
+    }
+    
+    // find value in linked list
+    void findInLinkedList(int value){
+        Node *tmp = head;
+        
+        if(tmp == NULL){
+            cout<<endl<<"Linked List is Empty";
+            return;
+        }else{
+            bool flag = false;
+            while(tmp != NULL){
+                if(tmp->data == value){
+                    flag = true;
+                    break;
+                }
+                
+                tmp = tmp->next;
+            }
+            
+            if(flag == true){
+                cout<<endl<<value<<" is Found in LinkedList";
+            }else{
+                cout<<endl<<value<<" is Not Found in LinkedList";
+            }
+        }
+    }
+    
+    // remove element from begining
+    void removeFromBegining(){
+        Node *tmp = head;
+        
+        if(tmp == NULL){
+            cout<<endl<<"LinkedList is Empty";
+            return;
+        }else{
+            head = tmp->next;
+        }
+    }
+    
+    // insert at end of LinkedList
+    void insertAtEnd(int value){
+        Node *newNode = new Node(value);
+        Node *tmp = head;
+        
+        if(head == NULL){
+            head = newNode;
+            return;
+        }else{
+            while(tmp->next != NULL){
+                tmp = tmp->next;
+            }
+            
+            tmp->next = newNode;
+        }
+    }
+    
+    // remove element from end
+    void removeElementFromEnd(){
+        if(head == NULL){
+            cout<<endl<<"LinkedList is Empty";
+            return;
+        }else{
+            Node *tmp = head;
+            while(tmp->next->next != NULL){
+                tmp = tmp->next;
+            }
+            
+            tmp->next = NULL;
+        }
+    }
+    
+    // insert Node at Specific Position
+    void insertAtPosition(int position, int value){
+        Node *newNode = new Node(value);
+        
+        // index 0
+        if(position == 0){
+            insertAtBegin(value);
+            return;
+        }
+        
+        if(head == NULL){
+            cout<<endl<<"Linked List is Empty";
+        }
+        
+        Node *tmp = head;
+        for(int i = 0; i < position && tmp->next != NULL; i++){
+            tmp = tmp->next;
+        }
+       
+       newNode->next = tmp->next; 
+       tmp->next = newNode;
+    }
+    
+    void removeFromBetween(int position){
+        if(head == NULL){
+            cout<<endl<<"LinkedList is Empty";
+            return;
+        }
+        
+        if(position == 0){
+            removeFromBegining();
+            return;
+        }
+        
+        Node *tmp = head;
+        for(int i = 0; i < position && tmp!= NULL; i++){
+            tmp = tmp->next;
+        }
+        
+        tmp->next = tmp->next->next;
+    }
+    
+    // display
+    void displayLinkedList(){
+        Node *tmp = head;
+        
+        cout<<endl<<"Data From Linked List is : ";
+        while(tmp != NULL){
+            cout<<tmp->data<<" -> ";
+            tmp = tmp->next;
+        }
+        cout<<"NULL";
+    }
+};
+
+int main(){
+    LinkedList linkedlist;
+    
+    linkedlist.insertAtBegin(50);
+    linkedlist.insertAtBegin(40);
+    linkedlist.insertAtBegin(30);
+    linkedlist.insertAtBegin(20);
+    linkedlist.insertAtBegin(10);
+    
+    linkedlist.displayLinkedList();
+    
+    linkedlist.findInLinkedList(30);
+    linkedlist.findInLinkedList(130);
+    
+    /*linkedlist.removeFromBegining();
+    linkedlist.removeFromBegining();
+    linkedlist.removeFromBegining();
+    linkedlist.displayLinkedList();*/
+    
+    linkedlist.insertAtEnd(60);
+    linkedlist.insertAtEnd(70);
+    linkedlist.insertAtEnd(80);
+    linkedlist.insertAtEnd(90);
+    linkedlist.insertAtEnd(100);
+    linkedlist.displayLinkedList();
+    
+    /*linkedlist.removeElementFromEnd();
+    linkedlist.removeElementFromEnd();
+    linkedlist.removeElementFromEnd();
+    linkedlist.removeElementFromEnd();
+    linkedlist.removeElementFromEnd();*/
+    
+    linkedlist.insertAtPosition(0, 11);
+    linkedlist.insertAtPosition(2, 111);
+    linkedlist.insertAtPosition(5, 115);
+    linkedlist.displayLinkedList();
+ 
+    //linkedlist.removeFromBetween(0);   
+    linkedlist.removeFromBetween(5);
+    linkedlist.displayLinkedList();
+    return 0;
+}

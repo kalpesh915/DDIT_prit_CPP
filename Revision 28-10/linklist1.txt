@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node *next;
+    
+    Node(){ 
+        this->next = NULL;
+    }
+    
+    Node(int value){
+        this->data = value;
+        this->next = NULL;
+    }
+};
+
+class LinkedList{
+  Node *head;
+  
+  public:
+  LinkedList(){
+      head = NULL;
+  }
+
+    // insert node at begining  
+    void insertAtBegin(int value){
+        Node *newNode = new Node(value);
+        
+        /// check for  linked list is empty
+        if(head == NULL){
+            head = newNode;
+        }else{
+            newNode->next = head;
+            head = newNode;
+        }
+    }
+    
+    // display
+    void displayLinkedList(){
+        Node *tmp = head;
+        
+        cout<<endl<<"Data From Linked List is : ";
+        while(tmp != NULL){
+            cout<<tmp->data<<" -> ";
+            tmp = tmp->next;
+        }
+        cout<<"NULL";
+    }
+};
+
+int main(){
+    LinkedList linkedlist;
+    
+    linkedlist.insertAtBegin(50);
+    linkedlist.insertAtBegin(40);
+    linkedlist.insertAtBegin(30);
+    linkedlist.insertAtBegin(20);
+    linkedlist.insertAtBegin(10);
+    
+    linkedlist.displayLinkedList();
+    return 0;
+}
